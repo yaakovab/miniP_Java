@@ -1,14 +1,25 @@
 package primitives;
-
 import java.util.Objects;
-
+/**
+ * this class represents vector in a 3-dimensional space
+ * and based on class Point3D
+ */
 public class Vector {
     /**
-     * this class represents vector in a 3-dimensional space
+     * vector contains the point from the origin
      */
     private Point3D head;
 
     //region Constructors
+
+    /**
+     * constructor gets 3 coordinates for head location
+     * @throws IllegalArgumentException in case of the zero vector
+     *
+     * @param x Coordinate x-axis
+     * @param y Coordinate y-axis
+     * @param z Coordinate z-axis
+     */
     public Vector(Coordinate x ,Coordinate y ,Coordinate z){
         head = new Point3D(x,y,z);
 
@@ -16,6 +27,12 @@ public class Vector {
             throw new IllegalArgumentException("Zero vector not accepted here");
     }
 
+    /**
+     * constructor that gets Point3D value
+     * @throws IllegalArgumentException in case of the zero vector
+     *
+     * @param head point3D
+     */
     public Vector(Point3D head) {
         this.head = head;
 
@@ -23,6 +40,12 @@ public class Vector {
             throw new IllegalArgumentException("Zero vector not accepted here");
     }
 
+    /**
+     *
+     * @param a x-axis
+     * @param b y-axis
+     * @param c z-axis
+     */
     public Vector(double a, double b, double c){
         head = new Point3D(a,b,c);
 
