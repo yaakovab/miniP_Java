@@ -1,0 +1,15 @@
+package geometries;
+
+import primitives.Point3D;
+import primitives.Vector;
+
+/**
+ * this interface is represents a general geometric shape with 1 method that
+ * should be implemented in all its implantation
+ */
+public interface Geometry {
+    /**
+     * @return vector orthogonal to the point in the geometry
+     */
+    public Vector geNormal(Point3D point);
+}
