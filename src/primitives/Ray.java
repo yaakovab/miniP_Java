@@ -5,6 +5,7 @@ import java.util.Objects;
 /**
  * this class represents a ray which consist of a vector
  * for direction and a point from which it starts
+ * and based on class Vector & Point3D
  */
 public class Ray {
 
@@ -12,11 +13,12 @@ public class Ray {
     private Vector dir;
 
     /**
-     * @param dir gets normalized in the ctor and then assin to value
+     * @param p0 Point3D from which the ray starts
+     * @param dir vector for direction of the ray
      */
     public Ray(Point3D p0, Vector dir) {
         this.p0 = p0;
-        //vector assign is a normalized vector
+        //vector dir assigned a normalized vector
         this.dir = dir.normalize();
     }
 
@@ -28,6 +30,8 @@ public class Ray {
         return dir;
     }
 
+
+    /*************** Admin *****************/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -41,10 +41,13 @@ public class Vector {
     }
 
     /**
+     * constructor that gets 3 double values
      *
      * @param a x-axis
      * @param b y-axis
      * @param c z-axis
+     *
+     * @throws IllegalArgumentException in case of the zero vector
      */
     public Vector(double a, double b, double c){
         head = new Point3D(a,b,c);
@@ -72,21 +75,40 @@ public class Vector {
         return head.z.coord;
     }
 
+    /**
+     *
+     * @param other another vector
+     * @return new vector received from subtracting 2 vectors
+     */
     public Vector subtract(Vector other){
         //using subtract method of Point3D's class
       return this.head.subtract(other.head);
     }
-
+    /**
+     *
+     * @param other another vector
+     * @return new vector received from adding 2 vectors
+     */
     public Vector add(Vector other){
         return new Vector(this.head.add(other));
     }
 
+    /**
+     *
+     * @param scalar to scale the vector
+     * @return the scaled vector
+     */
     public Vector scale(double scalar){
         return new Vector(getCoordX() * scalar,
                 getCoordY() * scalar,
                 getCoordZ() * scalar);
     }
 
+    /**
+     *
+     * @param other another vector
+     * @return scalar(number)
+     */
     public double dotProduct(Vector other){
         return (getCoordX() * other.getCoordX() +
                 getCoordY() * other.getCoordY() +
@@ -94,7 +116,7 @@ public class Vector {
     }
 
     /**
-     *
+     * @param other another vector
      * @return new Vector which is orthogonal to both original Vectors
      */
     public Vector crossProduct(Vector other){
@@ -130,27 +152,23 @@ public class Vector {
 
         //initiate new point with coordinates of vector that were normalized
         //used later to assign to the head of *this* Vector
-        Point3D p = new Point3D(getCoordX() / lengthOfVec,
+        Point3D point3D = new Point3D(getCoordX() / lengthOfVec,
                 getCoordY() / lengthOfVec,
                 getCoordZ() / lengthOfVec);
-        head = p;
+        head = point3D;
         return this; //Allows concatenation
     }
 
     /**
-     * @return new Vector which was normalised from *this* vector
+     * @return new Vector which was normalised from *this* Vector
      */
     public Vector normalized(){
-        //store original value of head bc it's about to change
-       Point3D p = head;
-       //assigning normalize vector to a new one using normalize method
-       Vector v = normalize();
-       //assign back the original value of heat to *this* vector
-       head = p;
+       Vector vector = new Vector(head).normalize();
 
-       return v;
+       return vector;
     }
 
+    /*************** Admin *****************/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
