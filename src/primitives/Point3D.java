@@ -67,7 +67,7 @@ public class Point3D {
 
     /**
      *
-     * @param vector
+     * @param vector added to 3D point
      * @return new point received from adding vector to point
      */
     public Point3D add(Vector vector){

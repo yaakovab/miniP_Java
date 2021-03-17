@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * this class represents a ray which consist of a vector
  * for direction and a point from which it starts
- * and based on class Vector & Point3D
+ * and based on class Vector and Point3D
  */
 public class Ray {
 
