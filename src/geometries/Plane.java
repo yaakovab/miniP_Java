@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Plane implements Geometry{
     /**
-     * point q0 is asocieated with the plane
+     * point q0 is associeated with the plane
      * Vector normal is the vector that orthogonal to the plane
      */
 

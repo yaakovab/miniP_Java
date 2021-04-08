@@ -110,6 +110,9 @@ public class Vector {
      * @return scalar(number)
      */
     public double dotProduct(Vector other){
+        if(other == null){
+            throw new IllegalArgumentException("other vector is null");
+        }
         return (getCoordX() * other.getCoordX() +
                 getCoordY() * other.getCoordY() +
                 getCoordZ() * other.getCoordZ());

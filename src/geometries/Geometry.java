@@ -10,7 +10,7 @@ import primitives.Vector;
 public interface Geometry {
     /**
      * @param point point on the shape
-     * @return vector orthogonal to the point in the geometry
+     * @return vector orthogonal to the point on the geometry
      */
     public Vector getNormal(Point3D point);
 }
