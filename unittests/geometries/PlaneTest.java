@@ -4,12 +4,17 @@ import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
+import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.junit.Assert.*;
 
 /**
  * Test for geometries.Plane class
  */
 public class PlaneTest {
+
+    private Vector vectorNormal;
+
     /**
      * Test method for {@link Plane#Plane(Point3D, Point3D, Point3D)}
      */
@@ -40,7 +45,10 @@ public class PlaneTest {
         Plane plane = new Plane(
                 new Point3D(0,0,1),new Point3D(1,0,0),new Point3D(0,1,0));
         double sqrt3 = Math.sqrt(1d / 3);
-        assertEquals("Bad normal to plane", new Vector(sqrt3, sqrt3, sqrt3),
-                plane.getNormal(new Point3D(0, 0, 1)));
+        vectorNormal = new Vector(sqrt3, sqrt3, sqrt3);
+        //Test for one of 2 options: the vectorNormal is either going up or down
+        Point3D p = new Point3D(0, 0, 1);
+        assertTrue("Bad normal to plane",
+                plane.getNormal(p).equals(vectorNormal) || plane.getNormal(p).equals(vectorNormal.scale(-1)));
     }
 }

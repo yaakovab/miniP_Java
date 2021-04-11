@@ -36,7 +36,12 @@ public class Plane implements Geometry{
      * generate the plane from these Points
      */
     public Plane(Point3D a,Point3D b,Point3D c) {
-        this.normal = null;
+        Vector u = a.subtract(b);
+        Vector v = a.subtract(c);
+        Vector n = u.crossProduct(v);
+
+
+        this.normal = n.normalize();
         this.q0 = a;
     }
 
@@ -47,7 +52,7 @@ public class Plane implements Geometry{
      */
     @Override
     public Vector getNormal(Point3D point) {
-        return null;
+        return normal;
     }
 
     /**

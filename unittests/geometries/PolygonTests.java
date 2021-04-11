@@ -88,7 +88,12 @@ public class PolygonTests {
         Polygon pl = new Polygon(new Point3D(0, 0, 1), new Point3D(1, 0, 0), new Point3D(0, 1, 0),
                 new Point3D(-1, 1, 1));
         double sqrt3 = Math.sqrt(1d / 3);
-        assertEquals("Bad normal to triangle", new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)));
+
+        Vector vectorNormal = new Vector(sqrt3, sqrt3, sqrt3);
+        //Test for one of 2 options: the vectorNormal is either going up or down
+        Point3D p = new Point3D(0, 0, 1);
+        assertTrue("Bad normal to polygon",
+                pl.getNormal(p).equals(vectorNormal) || pl.getNormal(p).equals(vectorNormal.scale(-1)));
     }
 
 }
