@@ -7,6 +7,9 @@ import primitives.Vector;
 import java.util.List;
 import java.util.Objects;
 
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
+
 /**
  * class Plane represents a three-dimensional plane in the cartesean space
  * made up of Point3D class and Vector class
@@ -83,8 +86,42 @@ public class Plane implements Geometry{
      */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+        Point3D P0 = ray.getP0();   //040
+        Vector v = ray.getDir();    //010
+
+        Vector n = normal;  //010
+
+        if(q0.equals(P0)){
+            return  null;
+        }
+
+        Vector P0_Q0 = q0.subtract(P0);  //200 -040 = 2 -4 0
+
+        double mechane = alignZero(n.dotProduct(P0_Q0)); //010 . 2 -4 0 = -4
+
+        //
+        if (isZero(mechane)){
+            return null;
+        }
+
+        //mone
+        double nv = alignZero(n.dotProduct(v));  //010 . 010 = 1
+
+        // ray is lying in the plane axis
+        if(isZero(nv)){
+            return null;
+        }
+
+        double  t = alignZero(mechane / nv); //-4
+
+        if (t <=0){
+            return  null;
+        }
+        Point3D P = ray.getPoint(t);
+
+        return List.of(P);
     }
+
 
    /* @Override
     public boolean equals(Object o) {

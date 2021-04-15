@@ -81,13 +81,13 @@ public class PlaneTest {
                 plane.findIntersections(new Ray(new Point3D(0,4,0), new Vector(-2,0,2))));
         // **** Group: Ray is orthogonal to the plane
         // TC13: – according to 𝑃0 (before) (1 point)
-        p = new Point3D(0,2,0);
-        result = plane.findIntersections(new Ray(new Point3D(0,4,0), new Vector(0,1,0)));
+        p = new Point3D(0.33333333333333333,1.3333333333333333,0.3333333333333333);
+        result = plane.findIntersections(new Ray(new Point3D(0,1,0), new Vector(1,1,1)));
         assertEquals("Wrong number of points", 1, result.size());
         assertEquals("Ray intersects the plane", List.of(p), result);
         // TC14: – according to 𝑃0 (in) (0 points)
         assertNull("Ray starts at plane",
-                plane.findIntersections(new Ray(new Point3D(0,2,0), new Vector(0,1,0))));
+                plane.findIntersections(new Ray(new Point3D(0,2,0), new Vector(1,1,1))));
         // TC15: – according to 𝑃0 (after the plane) (0 points)
         assertNull("Ray starts after plane",
                 plane.findIntersections(new Ray(new Point3D(0.327523993905339,-0.403942564427651,4.408486769939391),
