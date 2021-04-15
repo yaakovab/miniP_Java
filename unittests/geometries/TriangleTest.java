@@ -24,4 +24,23 @@ public class TriangleTest {
         assertTrue("Bad normal to triangle",
                 triangle.getNormal(p).equals(vectorNormal) || triangle.getNormal(p).equals(vectorNormal.scale(-1)));
     }
+
+    /**
+     * Test methode for findIntersection for Triangle
+     */
+    @Test
+    public void findIntersections() {
+        Triangle triangle = new Triangle(new Point3D(0,1,0),new Point3D(0,4,0),new Point3D(1,2,3));
+
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: inside polygon/triangle
+        // TC02: outside against edge
+        // TC03: outside against vertex
+
+        // =============== Boundary Values Tests ==================
+        // **** Group: The ray begins "before" plane
+        // TC11: on edge
+        // TC12: in vertex
+        // TC13: on edge's continuation
+    }
 }
