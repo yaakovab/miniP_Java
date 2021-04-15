@@ -1,8 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -73,6 +75,15 @@ public class Plane implements Geometry{
                 "q0=" + q0.toString() +
                 ", normal=" + normal.toString() +
                 '}';
+    }
+
+    /**
+     * @param ray from the Camera
+     * @return list of point that ray intersects with the Geometry shape
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 
    /* @Override

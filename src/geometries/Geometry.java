@@ -7,7 +7,7 @@ import primitives.Vector;
  *  interface Geometry represents a general geometric shape with 1 method that
  * should be implemented in all its implantation
  */
-public interface Geometry {
+public interface Geometry extends Intersectable{
     /**
      * @param point point on the shape
      * @return vector orthogonal to the point on the geometry

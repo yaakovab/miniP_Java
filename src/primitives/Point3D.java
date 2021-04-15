@@ -118,5 +118,9 @@ public class Point3D {
                 ", z=" + z +
                 ' ';
     }
+
+    public double getX() {
+        return x.coord;
+    }
     //endregion
 }

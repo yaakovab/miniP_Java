@@ -4,8 +4,6 @@ import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
-import static org.hamcrest.CoreMatchers.anyOf;
 import static org.junit.Assert.*;
 
 /**

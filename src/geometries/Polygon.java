@@ -85,4 +85,13 @@ public class Polygon implements Geometry {
 	public Vector getNormal(Point3D point) {
 		return plane.getNormal();
 	}
+
+	/**
+	 * @param ray from the Camera
+	 * @return list of point that ray intersects with the Geometry shape
+	 */
+	@Override
+	public List<Point3D> findIntersections(Ray ray) {
+		return null;
+	}
 }

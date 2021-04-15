@@ -4,6 +4,8 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * class tube represents an infinite tube in 3D cartesian system
  */
@@ -62,5 +64,14 @@ public class Tube implements Geometry{
                 "axisRay=" + axisRay.toString() +
                 ", radius=" + radius +
                 '}';
+    }
+
+    /**
+     * @param ray from the Camera
+     * @return list of point that ray intersects with the Geometry shape
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }
