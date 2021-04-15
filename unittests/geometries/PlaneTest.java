@@ -49,4 +49,29 @@ public class PlaneTest {
         assertTrue("Bad normal to plane",
                 plane.getNormal(p).equals(vectorNormal) || plane.getNormal(p).equals(vectorNormal.scale(-1)));
     }
+
+    @Test
+    public void findIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+        // Ray is neither orthogonal nor parallel to the plane
+        // TC01: Ray intersects the plane (1 point)
+        // TC02: Ray does not intersect the plane (0 points)
+
+        // =============== Boundary Values Tests ==================
+        // **** Group: Ray is parallel to the plane
+        // TC11: the ray included in the plane (0 points)
+        // TC12: the ray is not included in the plane (0 points)
+
+        // **** Group: Ray is orthogonal to the plane
+        // TC13: – according to 𝑃0 (before) (1 point)
+        // TC14: – according to 𝑃0 (in) (0 points)
+        // TC15: – according to 𝑃0 (after the plane) (0 points)
+
+        // TC16: Ray is neither orthogonal nor parallel to and begins at the plane
+        //(𝑃0 is in the plane, but not the ray) (0 points)
+
+        // TC17: Ray is neither orthogonal nor parallel to the plane and begins in
+        //the same point which appears as reference point in the plane (Q) (0 points)
+
+    }
 }
