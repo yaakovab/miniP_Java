@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.util.Collections.*;
+
 
 /**
  * This class represents a collection of geometric shapes
@@ -23,19 +25,20 @@ public class Geometries implements Intersectable{
     }
 
     /**
-     * @param list of 3D Points
+     * @param list of shapes
      * using Utility func add to assign list to member intersectables
      */
     public Geometries(Intersectable... list){
+        intersectables = new LinkedList<>();
         add(list);
     }
 
     /**
      * Utility func
-     * @param list of 3D Points
+     * @param list of shapes
      */
     private void add(Intersectable... list) {
-        Collections.addAll(intersectables, list);
+        addAll(intersectables, list);
     }
 
     /**
