@@ -6,7 +6,7 @@ import primitives.Ray;
 import java.util.List;
 
 /**
- * this Interface stands for the intersection points that ray from camera intersects the Geometry shape
+ * this Interface stands for the intersection points that ray from Camera intersects the Geometry shape
  */
 public interface Intersectable {
     /**

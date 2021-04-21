@@ -19,6 +19,12 @@ public class Camera {
    private double height;
    private double distance;
 
+    /**
+     * Construct Camera in the 3D coordinate system
+     * @param p0 position of Camera
+     * @param vTo Vector in direction toward View Plane
+     * @param vUP vector in up direction
+     */
     public Camera(Point3D p0, Vector vTo, Vector vUP) {
         this.p0 = p0;
         this.vUP = vUP.normalized();
@@ -30,17 +36,36 @@ public class Camera {
         this.vRight = vTo.crossProduct(vUP).normalized();
     }
 
+    /**
+     * borrowing from builder pattern
+     * @param width of View Plane
+     * @param height of view plane
+     * @return "this" Camera
+     */
     public Camera setViewPlaneSize(double width, double height){
         this.width = width;
         this.height = height;
         return this;
     }
 
+    /**
+     * borrowing from builder pattern
+     * @param distance between Camera and Viee Plane
+     * @return this Camera
+     */
     public Camera setDistance(double distance){
         this.distance = distance;
         return this;
     }
 
+    /**
+     * construct Ray through given Pixel[i,j]
+     * @param nX number of columns in the View Plane matrix
+     * @param nY number of rows in the View Plane matrix
+     * @param j index of column
+     * @param i index of row
+     * @return Ray(Point3D, Vector direction) that goes through Pixel[i,j]
+     */
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i){
         // PC = Image center
         Point3D pc = p0.add(vTo.scale(distance));
