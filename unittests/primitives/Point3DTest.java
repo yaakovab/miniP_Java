@@ -33,4 +33,13 @@ public class Point3DTest {
         //TC01: Test to check the result of adding a vector to a point
         assertEquals("ERROR: Point + Vector does not work correctly", point3D.ZERO,point3D.add(vector));
     }
+
+    @Test
+    public void testDistance() {
+        Point3D p1 = new  Point3D(1,2,3);
+        Point3D p2 = new Point3D(7,8,9);
+
+        assertEquals("distance is not correct", 10.392304845413264, p1.distance(p2),0.000000000001);
+
+    }
 }

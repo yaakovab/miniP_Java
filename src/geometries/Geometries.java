@@ -37,7 +37,7 @@ public class Geometries implements Intersectable{
      * Utility func
      * @param list of shapes
      */
-    private void add(Intersectable... list) {
+    public void add(Intersectable... list) {
         addAll(intersectables, list);
     }
 
