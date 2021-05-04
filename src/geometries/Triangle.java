@@ -65,4 +65,13 @@ public class Triangle extends Polygon{
         return ret;
     }
 
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<Point3D> intersectedPoint = findIntersections(ray);
+        if(intersectedPoint != null){
+            GeoPoint geoPoint = new GeoPoint(this, intersectedPoint.get(0));
+            return List.of(geoPoint);
+        }
+        return null;
+    }
+
 }

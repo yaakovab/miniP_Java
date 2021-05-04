@@ -1,15 +1,13 @@
 package geometries;
-
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-
 import java.util.List;
 
 /**
  * class tube represents an infinite tube in 3D cartesian system
  */
-public class Tube implements Geometry{
+public class Tube extends Geometry {
     /**
      * axis ray and radius is what makes up the tube
      */
@@ -72,6 +70,11 @@ public class Tube implements Geometry{
      */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
+
+    @Override
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         return null;
     }
 }

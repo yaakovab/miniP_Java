@@ -1,5 +1,4 @@
 package scene;
-
 import elements.AmbientLight;
 import geometries.Geometries;
 import primitives.Color;
@@ -11,16 +10,14 @@ import primitives.Color;
 public class Scene {
 
     public final String sceneName;
-
     public Color background = Color.BLACK ;
-    public AmbientLight ambientlight = new AmbientLight( Color.BLACK , 1d);
+    public AmbientLight ambientlight = new AmbientLight(Color.BLACK , 1d);
     public Geometries geometries;
 
 
-    public Scene(String name) {
-        this.sceneName = name;
+    public Scene(String sceneName) {
+        this.sceneName = sceneName;
         this.geometries = new Geometries();
-
     }
 
 
@@ -52,7 +49,4 @@ public class Scene {
         this.geometries = geometries;
         return this;
     }
-
-
-
 }

@@ -14,7 +14,7 @@ import static primitives.Util.isZero;
  * class Plane represents a three-dimensional plane in the cartesean space
  * made up of Point3D class and Vector class
  */
-public class Plane implements Geometry{
+public class Plane extends Geometry {
     /**
      * point q0 is associeated with the plane
      * Vector normal is the vector that orthogonal to the plane
@@ -122,6 +122,15 @@ public class Plane implements Geometry{
         return List.of(P);
     }
 
+    @Override
+    public List<GeoPoint> findGeoIntersections(Ray ray){
+        List<Point3D> intersectedPoint = findIntersections(ray);
+        if(intersectedPoint != null){
+            GeoPoint geoPoint = new GeoPoint(this, intersectedPoint.get(0));
+            return List.of(geoPoint);
+        }
+        return null;
+    }
 
    /* @Override
     public boolean equals(Object o) {

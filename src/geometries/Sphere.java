@@ -11,7 +11,7 @@ import java.util.List;
  * class Sphere represents a sphere in 3D dimensional cartesian system
  */
 
-public class Sphere implements Geometry{
+public class Sphere extends Geometry {
     /**
      * center is a Point3D for center of the sphere
      * radius
@@ -102,6 +102,19 @@ public class Sphere implements Geometry{
       if(t2 > 0){
           return List.of(p2);
       }
+        return null;
+    }
+
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<Point3D> intersections = findIntersections(ray);
+        if(intersections != null){
+            GeoPoint geoPoint = new GeoPoint(this, intersections.get(0));
+            if(intersections.size() == 2){
+                GeoPoint geoPoint1 = new GeoPoint(this, intersections.get(1));
+                return List.of(geoPoint,geoPoint1);
+            }
+            return List.of(geoPoint);
+        }
         return null;
     }
 }

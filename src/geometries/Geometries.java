@@ -1,12 +1,8 @@
 package geometries;
-
 import primitives.Point3D;
 import primitives.Ray;
-
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
 import static java.util.Collections.*;
 
 
@@ -18,7 +14,8 @@ public class Geometries implements Intersectable{
    private List<Intersectable> intersectables;
 
     /**
-     * create empty LinkedList
+     * constructor
+     * creates empty LinkedList
      */
     public Geometries() {
         intersectables = new LinkedList<>();
@@ -50,6 +47,21 @@ public class Geometries implements Intersectable{
         List<Point3D> result = null;
         for (Intersectable geo : intersectables) {
             List<Point3D> geoPoints = geo.findIntersections(ray);
+            if(geoPoints != null){
+                if(result == null){
+                    result = new LinkedList<>();
+                }
+                result.addAll(geoPoints);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<GeoPoint> result = null;
+        for (Intersectable geo: intersectables) {
+            List<GeoPoint> geoPoints = geo.findGeoIntersections(ray);
             if(geoPoints != null){
                 if(result == null){
                     result = new LinkedList<>();

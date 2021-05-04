@@ -1,16 +1,12 @@
-/**
- *
- */
 package renderer;
 
 import elements.Camera;
 import primitives.*;
 import scene.Scene;
 
-import java.awt.Color;
 import java.util.MissingResourceException;
 /**
- * @author chaim & michael
+ * @author Yaacov
  *
  */
 public class Render {
@@ -88,16 +84,16 @@ public class Render {
 
     public void renderImage() {
         try {
-            if (imageWriter==null) {
+            if (imageWriter == null) {
                 throw new MissingResourceException("missing resource", ImageWriter.class.getCanonicalName(), "");
             }
-            if (scene==null) {
+            if (scene == null) {
                 throw new MissingResourceException("missing resource", Scene.class.getCanonicalName(), "");
             }
-            if (camera==null) {
+            if (camera == null) {
                 throw new MissingResourceException("missing resource", Camera.class.getCanonicalName(), "");
             }
-            if (rayTracerBase==null) {
+            if (rayTracerBase == null) {
                 throw new MissingResourceException("missing resource", RayTracerBase.class.getCanonicalName(), "");
             }
             // if all right ... rendering the image
@@ -107,7 +103,7 @@ public class Render {
                 for (int j = 0; j < Nx; j++) {
 
                     Ray ray = camera.constructRayThroughPixel(Nx, Ny, j, i);
-                    primitives.Color pixelColor = rayTracerBase.traceRay(ray);
+                    Color pixelColor = rayTracerBase.traceRay(ray);
                     imageWriter.writePixel(j,i,pixelColor);
                 }
             }
@@ -139,7 +135,7 @@ public class Render {
 
     }
     /**
-     *  Finally use with imagewriter to draw the image builded
+     *  Finally use with imageWriter to draw the image builded
      */
     public void writeToImage() {
         imageWriter.writeToImage();
