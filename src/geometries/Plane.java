@@ -80,12 +80,28 @@ public class Plane extends Geometry {
                 '}';
     }
 
+
     /**
-     * @param ray from the Camera
-     * @return list of point that ray intersects with the Geometry shape
+     * @param ray from Camera
+     * @return list of Points being intersected with ray in context with their location
+     * on a geometry shape
      */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray){
+        List<Point3D> intersectedPoint = getIntersections(ray);
+        if(intersectedPoint != null){
+            GeoPoint geoPoint = new GeoPoint(this, intersectedPoint.get(0));
+            return List.of(geoPoint);
+        }
+        return null;
+    }
+
+    /**
+     * private util func
+     * @param ray from the Camera
+     * @return list of Points that ray intersects with the Geometry shape
+     */
+    private List<Point3D> getIntersections(Ray ray) {
         Point3D P0 = ray.getP0();   //040
         Vector v = ray.getDir();    //010
 
@@ -97,14 +113,14 @@ public class Plane extends Geometry {
 
         Vector P0_Q0 = q0.subtract(P0);  //200 -040 = 2 -4 0
 
-        double mechane = alignZero(n.dotProduct(P0_Q0)); //010 . 2 -4 0 = -4
+        double denominator = alignZero(n.dotProduct(P0_Q0)); //010 . 2 -4 0 = -4
 
         //
-        if (isZero(mechane)){
+        if (isZero(denominator)){
             return null;
         }
 
-        //mone
+        //nominator
         double nv = alignZero(n.dotProduct(v));  //010 . 010 = 1
 
         // ray is lying in the plane axis
@@ -112,9 +128,9 @@ public class Plane extends Geometry {
             return null;
         }
 
-        double  t = alignZero(mechane / nv); //-4
+        double  t = alignZero(denominator / nv); //-4
 
-        if (t <=0){
+        if (t <= 0){
             return  null;
         }
         Point3D P = ray.getPoint(t);
@@ -122,23 +138,5 @@ public class Plane extends Geometry {
         return List.of(P);
     }
 
-    @Override
-    public List<GeoPoint> findGeoIntersections(Ray ray){
-        List<Point3D> intersectedPoint = findIntersections(ray);
-        if(intersectedPoint != null){
-            GeoPoint geoPoint = new GeoPoint(this, intersectedPoint.get(0));
-            return List.of(geoPoint);
-        }
-        return null;
-    }
-
-   /* @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Plane plane = (Plane) o;
-        return Objects.equals(q0, plane.q0) &&
-                Objects.equals(normal, plane.normal);
-    }*/
 
 }

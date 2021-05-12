@@ -5,6 +5,7 @@ import primitives.Ray;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * this Interface stands for the intersection points that ray from Camera intersects the Geometry shape
@@ -43,18 +44,23 @@ public interface Intersectable {
 
 
     /**
+     *  default implementation using func {@link #findGeoIntersections(Ray)}
      *  find intersections with ray
      * @param ray from the Camera
-     * @return list of point that ray intersects with the Geometry shape
+     * @return list of Points that ray intersects with the Geometry shape
      */
-    List<Point3D> findIntersections(Ray ray);
+    default List<Point3D> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null
+                : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
+    }
 
-    /**
-     * find geo & point intersections with ray
-     *
-     * @param ray from Camera
-     * @return list of GeoPoint that the ray intersects it
-     */
+        /**
+         * find geo & point intersections with ray
+         *
+         * @param ray from Camera
+         * @return list of GeoPoint that the ray intersects it
+         */
     List<GeoPoint> findGeoIntersections(Ray ray);
 
 }

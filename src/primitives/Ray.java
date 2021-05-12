@@ -67,7 +67,7 @@ public class Ray {
         // first check if the list is not empty
         if (intersections != null) {
             for (Point3D p:intersections) {
-                double temp = this.p0.distance(p);
+                double temp = this.p0.distanceSquared(p);
                 if (temp < closeDistance) {
                     closeDistance = temp;
                     result = p;
@@ -92,7 +92,7 @@ public class Ray {
         // first check if the list is not empty
         if (intersections != null) {
             for (GeoPoint gp:intersections) {
-                double temp = this.p0.distance(gp.point);
+                double temp = this.p0.distanceSquared(gp.point);
                 if (temp < closeDistance) {
                     closeDistance = temp;
                     geoPoint = gp;

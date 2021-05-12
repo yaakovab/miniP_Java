@@ -27,14 +27,29 @@ public class Triangle extends Polygon{
         return super.getNormal(point);
     }
 
+
     /**
+     * @param ray from Camera
+     * @return list of Points being intersected with ray in context with their location
+     * on a geometry shape
+     */
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<Point3D> intersectedPoint = getIntersections(ray);
+        if(intersectedPoint != null){
+            GeoPoint geoPoint = new GeoPoint(this, intersectedPoint.get(0));
+            return List.of(geoPoint);
+        }
+        return null;
+    }
+
+
+    /**
+     * utility func for {@link #findGeoIntersections(Ray)}
      * @param ray from the Camera
      * @return list of point that ray intersects with the Geometry shape
      */
 
-
-    @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    private List<Point3D> getIntersections(Ray ray) {
 
         // if ray doesn't intersect the plan consist in triangle return null
         if (this.plane.findIntersections(ray) == null) {
@@ -65,13 +80,8 @@ public class Triangle extends Polygon{
         return ret;
     }
 
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        List<Point3D> intersectedPoint = findIntersections(ray);
-        if(intersectedPoint != null){
-            GeoPoint geoPoint = new GeoPoint(this, intersectedPoint.get(0));
-            return List.of(geoPoint);
-        }
-        return null;
+    public List<Point3D> findIntersections(Ray ray){
+        List<Point3D> res = getIntersections(ray);
+        return res;
     }
-
 }

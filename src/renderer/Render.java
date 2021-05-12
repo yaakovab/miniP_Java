@@ -1,14 +1,14 @@
+/**
+ * @author Yaacov Abramowitz
+ *
+ */
 package renderer;
-
 import elements.Camera;
 import primitives.*;
 import scene.Scene;
 
 import java.util.MissingResourceException;
-/**
- * @author Yaacov
- *
- */
+
 public class Render {
 
     ImageWriter imageWriter = null;
@@ -119,7 +119,7 @@ public class Render {
      * @param interval
      * @param color
      */
-    public void printGrid( int interval, primitives.Color color)
+    public void printGrid(int interval, primitives.Color color)
     {
         int Nx = imageWriter.getNx();
         int Ny = imageWriter.getNy();
