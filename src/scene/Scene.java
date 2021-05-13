@@ -1,7 +1,11 @@
 package scene;
 import elements.AmbientLight;
+import elements.LightSource;
 import geometries.Geometries;
 import primitives.Color;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Yaacov
@@ -11,8 +15,9 @@ public class Scene {
 
     public final String sceneName;
     public Color background = Color.BLACK ;
-    public AmbientLight ambientlight = new AmbientLight(Color.BLACK , 1d);
+    public AmbientLight ambientlight = new AmbientLight();
     public Geometries geometries;
+    public List<LightSource> lights = new LinkedList<LightSource>();
 
 
     public Scene(String sceneName) {
@@ -47,6 +52,16 @@ public class Scene {
      */
     public Scene setGeometries(Geometries geometries) {
         this.geometries = geometries;
+        return this;
+    }
+
+    /**
+     * setter use builder pattern
+     * @param lights list of lights in scene
+     * @return this for chaining purpose
+     */
+    public Scene setLights(List<LightSource> lights) {
+        this.lights = lights;
         return this;
     }
 }

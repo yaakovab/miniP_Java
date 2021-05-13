@@ -1,9 +1,7 @@
 package geometries;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
+
 import java.util.List;
 
 /**
@@ -13,6 +11,13 @@ import java.util.List;
  */
 public abstract class Geometry implements Intersectable {
 
+    // material of geometry shape
+    private Material material = new Material();
+
+    public Material getMaterial() {
+        return material;
+    }
+
     protected Color emission = Color.BLACK;
     /**
      * @param point point on the shape
@@ -21,7 +26,7 @@ public abstract class Geometry implements Intersectable {
     public abstract Vector getNormal(Point3D point);
 
     /**
-     * geter func
+     * getter f
      * @return emission - unique color of each object
      */
     public Color getEmission() {
@@ -29,7 +34,7 @@ public abstract class Geometry implements Intersectable {
     }
 
     /**
-     * seter func
+     * setter
      * @param emission unique color of each object
      * @return this for chaining purposes
      */
@@ -38,4 +43,13 @@ public abstract class Geometry implements Intersectable {
         return this;
     }
 
+    /**
+     * setter use builder pattern
+     * @param material the object made of
+     * @return this for chaining purposes
+     */
+    public Geometry setMaterial(Material material) {
+        this.material = material;
+        return this;
+    }
 }

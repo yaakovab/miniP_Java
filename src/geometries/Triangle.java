@@ -80,8 +80,4 @@ public class Triangle extends Polygon{
         return ret;
     }
 
-    public List<Point3D> findIntersections(Ray ray){
-        List<Point3D> res = getIntersections(ray);
-        return res;
-    }
 }

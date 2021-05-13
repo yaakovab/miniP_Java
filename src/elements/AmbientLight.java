@@ -1,18 +1,17 @@
+/**
+ * @author Yaacov Abramowitz
+ **/
 package elements;
-
 import primitives.Color;
 
 /**
- *
- * @author Yaacov
  * this class represent ambient light which is constant for each object at the scene
- *
  */
 public class AmbientLight extends Light{
 
 
     /**
-     * constructor
+     * constructor uses Light's constructor
      * @param Ia intensity color
      * @param Ka constant
      */
@@ -20,7 +19,11 @@ public class AmbientLight extends Light{
         super(Ia.scale(Ka));
     }
 
-
-
-
+    /**
+     * default constructor - default color = Black
+     * uses Light's constructor
+     */
+    public AmbientLight() {
+        super(Color.BLACK);
+    }
 }

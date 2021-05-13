@@ -86,14 +86,6 @@ public class Polygon extends Geometry {
 		return plane.getNormal();
 	}
 
-	/**
-	 * @param ray from the Camera
-	 * @return list of point that ray intersects with the Geometry shape
-	 */
-	@Override
-	public List<Point3D> findIntersections(Ray ray) {
-		return null;
-	}
 
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		return null;
