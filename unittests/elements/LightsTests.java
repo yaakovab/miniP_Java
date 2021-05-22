@@ -5,6 +5,8 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
+import java.util.List;
+
 /**
  * Test rendering a basic image
  *
@@ -130,6 +132,49 @@ public class LightsTests {
                 .setKl(0.0001).setKq(0.000005));
 
         ImageWriter imageWriter = new ImageWriter("lightTrianglesSpot", 500, 500);
+        Render render = new Render()//
+                .setImageWriter(imageWriter) //
+                .setCamera(camera2) //
+                .setRayTracerBase(new RayTracerBasic(scene2));
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    /**
+     * Produce a picture of sphere lighted by all 3 light sources
+     */
+    @Test
+    public void sphereMultipleLights(){
+        scene1.geometries.add(sphere);
+        scene1.setLights(List.of(new DirectionalLight(new Color(500, 300, 0), new Vector(1, 1, -1)),
+                new PointLight(new Color(500, 300, 0), new Point3D(-50, -50, 50))//
+                        .setKl(0.00001).setKq(0.000001),
+                new SpotLight(new Color(500, 300, 0), new Point3D(50,50,-50), new Vector(-1, -1, 20)) //
+                        .setKl(0.00001).setKq(0.00000001)));
+
+        ImageWriter imageWriter = new ImageWriter("MultipleLightSphere", 500, 500);
+        Render render = new Render()//
+                .setImageWriter(imageWriter) //
+                .setCamera(camera1) //
+                .setRayTracerBase(new RayTracerBasic(scene1));
+        render.renderImage();
+        render.writeToImage();
+    }
+
+    /**
+     * Produces a pic of couple of 2 triangles lighted by all 3 light sources
+     */
+    @Test
+    public void trianglesMultipleLights(){
+        scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(300)),
+                triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(300)));
+        scene2.setLights(List.of(new DirectionalLight(new Color(300, 150, 150), new Vector(0, 0, -1)),
+                new PointLight(new Color(500, 500, 500), new Point3D(10, -10, -130))//
+                        .setKl(0.0005).setKq(0.0005),
+                new SpotLight(new Color(500, 250, 250), new Point3D(100,-150,-100), new Vector(-20, 240, -1)) //
+                        .setKl(0.00001).setKq(0.00000005)));
+
+        ImageWriter imageWriter = new ImageWriter("MultipleLightTriangles", 500, 500);
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //

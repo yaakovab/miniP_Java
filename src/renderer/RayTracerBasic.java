@@ -57,6 +57,13 @@ public class RayTracerBasic extends RayTracerBase {
                         .add(calcLocalEffects(gp, ray)));
     }
 
+    /**
+     * calculates additional effects on the color
+     * @param intersection point and shape in which intersection
+     *                     occured btn ray from camera and object
+     * @param ray from Camera
+     * @return Color
+     */
     private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
         // v is the ray from camera and is normalized
         Vector v = ray.getDir().normalized();
@@ -74,7 +81,7 @@ public class RayTracerBasic extends RayTracerBase {
         for (LightSource lightSource : scene.lights) {
             Vector l = lightSource.getL(intersection.point);
             double nl = alignZero(n.dotProduct(l));
-            if (nl * nv > 0) { // sign(nl) == sing(nv)
+            if (nl * nv > 0) { // sign(nl) == sign(nv)
                 Color lightIntensity = lightSource.getIntensity(intersection.point);
                 color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                         calcSpecular(ks, l, n, v, nShininess, lightIntensity));
@@ -84,17 +91,32 @@ public class RayTracerBasic extends RayTracerBase {
 
     }
 
+    /**
+     * calculates the specular effect of light upon object
+     * @param ks specular attenuation factor
+     * @param l Vector from the source light to the object
+     * @param n Vector normal to intersected point
+     * @param v Vector from virtual Camera to object
+     * @param nShininess of object
+     * @param lightIntensity Color
+     * @return appropriate specular component
+     */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
-        // -2 * (l n) n
-        double ab = alignZero((2) * l.dotProduct(n));
-        Vector a = n.scale(ab);
-        // l - a
-        Vector r = l.subtract(a);
+        // Calculating reflectance vector (r)
+        Vector r = l.subtract(n.scale(alignZero(2 * l.dotProduct(n))));
         double vr = alignZero(v.dotProduct(r));
         double minusVr = vr * (-1);
         return lightIntensity.scale(ks * Math.pow(Math.max(0, minusVr), nShininess));
     }
 
+    /**
+     * calculates the diffusive component of light shaded upon an object
+     * @param kd diffusive attenuation factor
+     * @param l Vector from the source light to the object
+     * @param n Vector normal to intersected point
+     * @param lightIntensity Color
+     * @return appropriate diffusive component
+     */
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
         double factor = alignZero(l.dotProduct(n));
         return lightIntensity.scale(kd * Math.abs(factor));
