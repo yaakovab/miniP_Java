@@ -3,6 +3,8 @@ import geometries.Intersectable.GeoPoint;
 import java.util.List;
 import java.util.Objects;
 
+import static primitives.Util.isZero;
+
 /**
  * this class represents a ray which consist of a vector
  * for direction and a point from which it starts
@@ -12,6 +14,10 @@ public class Ray {
 
     private Point3D p0;
     private Vector dir;
+    /**
+     * for wrongs in calculate ray start from surface of object we offset the point
+     */
+    private static final double DELTA = 0.1;
 
     /**
      * @param p0 Point3D from which the ray starts
@@ -21,6 +27,22 @@ public class Ray {
         this.p0 = p0;
         //vector dir assigned a normalized vector
         this.dir = dir.normalize();
+    }
+
+    public Ray(Point3D head, Vector direction, Vector normal) {
+        if (isZero(normal.dotProduct(direction))) {
+            this.p0 = null;
+            this.dir = null;
+
+        }
+        else {
+            double sign = normal.dotProduct(direction) > 0 ? 1.0 : -1.0;
+
+            this.p0 = head.add(normal.scale(DELTA * sign));
+            this.dir = direction.normalized();
+
+        }
+
     }
 
     public Point3D getP0() {

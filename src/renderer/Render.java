@@ -11,7 +11,6 @@ import java.util.MissingResourceException;
 public class Render {
 
     ImageWriter imageWriter = null;
-   // Scene scene = null;
     Camera camera = null;
     RayTracerBase rayTracerBase = null;
 
@@ -23,14 +22,7 @@ public class Render {
         this.imageWriter = imageWriter;
         return this;
     }
-//    /**
-//     * @param scene the scene to set
-//     */
-//    public Render setScene(Scene scene) {
-//        this.scene = scene;
-//        return this;
-//
-//    }
+
     /**
      * @param camera the camera to set
      */
@@ -86,8 +78,6 @@ public class Render {
             if (imageWriter == null) {
                 throw new MissingResourceException("missing resource", ImageWriter.class.getCanonicalName(), "");
             }
-//            if (scene == null) {
-//                throw new MissingResourceException("missing resource", Scene.class.getCanonicalName(), "");          // }
             if (camera == null) {
                 throw new MissingResourceException("missing resource", Camera.class.getCanonicalName(), "");
             }

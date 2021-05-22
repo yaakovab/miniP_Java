@@ -11,7 +11,7 @@ import primitives.Vector;
  */
 public class DirectionalLight extends Light implements LightSource{
 
-    private Vector direction;
+    private final Vector direction;
 
     /**
      * constructor
@@ -40,5 +40,10 @@ public class DirectionalLight extends Light implements LightSource{
     public Vector getL(Point3D p) {
         Vector l = direction.normalized();
         return l;
+    }
+
+    @Override
+    public double getDistance(Point3D point) {
+        return Double.POSITIVE_INFINITY;
     }
 }

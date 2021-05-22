@@ -10,6 +10,14 @@ public class Material {
     public double kS;
     // shininess of material
     public int nShininess;
+    /**
+     *  reflection
+     */
+    public double kr = 0;
+    /**
+     * transparency (refraction)
+     */
+    public double kt = 0;
 
     /**
      * default constructor
@@ -51,4 +59,13 @@ public class Material {
         return this;
     }
 
+    public Material setKt (double kt) {
+        this.kt = kt;
+        return this;
+    }
+
+    public Material setKr (double kr) {
+        this.kr = kr;
+        return this;
+    }
 }
