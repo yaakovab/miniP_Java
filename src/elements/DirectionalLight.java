@@ -42,6 +42,11 @@ public class DirectionalLight extends Light implements LightSource{
         return l;
     }
 
+    /**
+     * calculate distance between light source to point intersected
+     * @param point of intersection
+     * @return positive infinity
+     */
     @Override
     public double getDistance(Point3D point) {
         return Double.POSITIVE_INFINITY;

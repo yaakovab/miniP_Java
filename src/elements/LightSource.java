@@ -20,9 +20,9 @@ public interface LightSource {
     public Vector getL(Point3D p);
 
     /**
-     * calculate distance between light source to point intersected. its for correct the shadow rays results
-     * @param point
-     * @return
+     * calculate distance between light source to point intersected
+     * @param point of intersection
+     * @return the distance
      */
     double getDistance(Point3D point);
 

@@ -18,14 +18,18 @@ import static primitives.Util.isZero;
  */
 public class RayTracerBasic extends RayTracerBase {
 
-    //  initialize attenuation factor to 1
+    /**
+     *   initialize attenuation factor to 1
+     */
     private static final double INITIAL_K = 1.0;
     //  number of times to calculate reflection and transparency
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     // this is the limit of allowing to k- attenuation to get smaller
     private static final double MIN_CALC_COLOR_K = 0.001;
-    //  for wrongs in calculate ray start from surface of object
-    //  we offset the point
+    /**
+     * Move head of "shadow rays" to avoid a situation that a shadow ray is intersected
+     * with its own shape
+     */
     private static final double DELTA = 0.1;
 
 
@@ -144,21 +148,26 @@ public class RayTracerBasic extends RayTracerBase {
         return lightIntensity.scale(kd * Math.abs(factor));
     }
 
-    //private boolean unshaded(Vector l, Vector n, GeoPoint geopoint, LightSource lightSource)
 
-    // like complex scens
-    // that it shaded inside kubiya for example,
-    // consider to add argument to represent the point of position of light, and
-    // check wether it realy need to shade
-    // may be shaded object is behind the light source
-    private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
-        Vector lightDirection = l.scale(-1); // from point to light source
-        Ray lightRay = new Ray(geopoint.point, lightDirection, n); // refactored ray head move
+    /**
+     * unshaded gets an intersection point and shoots what's called "shadow rays" to the light source to check
+     * whether another object is closer to source light and if so it's not lighted from that source light
+     * @param lightSource shade light in scene
+     * @param l Vector from the source light to the object
+     * @param n Vector normal to intersected point
+     * @param geoPoint contains the shape and point of intersection with Ray from Camera
+     * @return boolean expression
+     */
+    private boolean unshaded(LightSource lightSource, Vector l, Vector n, GeoPoint geoPoint) {
+        Vector lightDirection = l.scale(-1); // shoots ray from intersected point to light source
+        Ray lightRay = new Ray(geoPoint.point, lightDirection, n); // refactored ray head move
         List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
         if (intersections != null) {
-            double lightDistance = light.getDistance(geopoint.point);
+            double lightDistance = lightSource.getDistance(geoPoint.point);
+            double lightDistSquared = lightDistance * lightDistance; // square it for a better efficiency
             for (GeoPoint intersection : intersections) {
-                if (alignZero(intersection.point.distance(geopoint.point) - lightDistance) <= 0 && intersection.geometry.getMaterial().kt == 0){
+                if (alignZero(intersection.point.distanceSquared(geoPoint.point) - lightDistSquared) <= 0
+                        && intersection.geometry.getMaterial().kt == 0){
                     return false;
                 }
             }

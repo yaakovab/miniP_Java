@@ -1,5 +1,4 @@
 package elements;
-
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
@@ -85,9 +84,13 @@ public class PointLight extends Light implements LightSource{
         return dirOfLight;
     }
 
+    /**
+     * calculate distance between light source to point intersected
+     * @param point of intersection
+     * @return the distance
+     */
     @Override
     public double getDistance(Point3D point) {
-        double distance = position.distance(point);
-        return distance ;
+        return position.distance(point);
     }
 }
