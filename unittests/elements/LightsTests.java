@@ -32,6 +32,27 @@ public class LightsTests {
             .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(100));
 
     /**
+     * todo: example!!!
+     */
+    @Test
+    public void exampleTest(){
+        Scene scene = new Scene("exTest")
+                .setBackground(new Color(java.awt.Color.BLUE));
+        Camera camera = new Camera(new Point3D(1,0,0),new Vector(1,0,0),new Vector(0,1,0))
+                .setViewPlaneSize(200,200)
+                .setDistance(1000);
+        Geometry sphere3 = new Sphere(new Point3D(10000,0,0),100)
+                .setEmission(new Color(java.awt.Color.RED));
+        scene.geometries.add(sphere3);
+        ImageWriter ir = new ImageWriter("exT",500,500);
+        Render re = new Render()
+                .setImageWriter(ir)
+                .setCamera(camera)
+                .setRayTracerBase(new RayTracerBasic(scene));
+        re.renderImage();
+        re.writeToImage();
+    }
+    /**
      * Produce a picture of a sphere lighted by a directional light
      */
     @Test

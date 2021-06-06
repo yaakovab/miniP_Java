@@ -1,6 +1,4 @@
-package renderer; /**
- *
- */
+package renderer;
 
 
 import org.junit.Test;
@@ -43,7 +41,8 @@ public class ReflectionRefractionTests {
         Render render = new Render() //
                 .setImageWriter(new ImageWriter("refractionTwoSpheres", 500, 500)) //
                 .setCamera(camera) //
-                .setRayTracerBase(new RayTracerBasic(scene));
+                .setRayTracerBase(new RayTracerBasic(scene))
+                .setSuperSampling(true);
         render.renderImage();
         render.writeToImage();
     }

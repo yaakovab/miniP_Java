@@ -1,6 +1,5 @@
 package elements;
 import org.junit.Test;
-import elements.*;
 import geometries.*;
 import primitives.*;
 import renderer.*;
@@ -9,7 +8,7 @@ import scene.Scene;
 /**
  * Testing basic shadows
  *
- * @author Dan
+ * @author Dan & Yaacov Abramowitz
  */
 public class ShadowTests {
     private Scene scene = new Scene("Test scene");

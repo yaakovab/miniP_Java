@@ -4,6 +4,8 @@ import primitives.Ray;
 import primitives.Vector;
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 /**
  * class tube represents an infinite tube in 3D cartesian system
  */
@@ -43,10 +45,11 @@ public class Tube extends Geometry {
 
         //t = v(p-p0)
         Vector p_p0 = point.subtract(p_0);
-        double s = direction.dotProduct(p_p0);
+        double s = alignZero(direction.dotProduct(p_p0));
 
         Point3D o = p_0;
       //O = p0 + tv
+        // s being 0 means that point on surface of tube is orthogonal to point of ray
         if(s != 0) {
             Vector tv = direction.scale(s);
             o = p_0.add(tv);

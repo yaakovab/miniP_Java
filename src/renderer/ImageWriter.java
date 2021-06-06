@@ -20,6 +20,16 @@ import javax.imageio.*;
 public class ImageWriter {
     private int nX;
     private int nY;
+    private int mini_nX;
+    private int mini_nY;
+
+    public int getMini_nX() {
+        return mini_nX;
+    }
+
+    public int getMini_nY() {
+        return mini_nY;
+    }
 
     private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
 
@@ -39,6 +49,9 @@ public class ImageWriter {
         this.imageName = imageName;
         this.nX = nX;
         this.nY = nY;
+        // default value for superSampling
+        this.mini_nX = 7;
+        this.mini_nY = 7;
 
         image = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
     }

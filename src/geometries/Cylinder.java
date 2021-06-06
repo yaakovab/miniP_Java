@@ -4,6 +4,8 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import static primitives.Util.alignZero;
+
 /**
  * class Cylinder extends class Tube and is a finite Tube in 3D cartesian system
  */
@@ -29,12 +31,21 @@ public class Cylinder extends Tube{
     }
 
     /**
-     *
+     * todo: it's not implemented correctly
      * @param point Point3D on the Cylinder
      * @return the normal
      */
     @Override
     public Vector getNormal(Point3D point) {
+        Vector direction = axisRay.getDir();
+        Point3D p_0 = axisRay.getP0();
+
+        //t = v(p-p0)
+        Vector p_p0 = point.subtract(p_0);
+        double s = alignZero(direction.dotProduct(p_p0));
+
+
+
         return super.getNormal(point);
     }
 
