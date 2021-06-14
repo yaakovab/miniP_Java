@@ -118,4 +118,40 @@ public class ReflectionRefractionTests {
         render.renderImage();
         render.writeToImage();
     }
+
+    @Test
+    public void trianglesTransparentSphere11() {
+        Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+                .setViewPlaneSize(200, 200).setDistance(1000);
+
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.blue), 0.15));
+
+        scene.geometries.add( //
+                new Triangle(new Point3D(-150, -150, -115), new Point3D(100, -100, -135), new Point3D(50, 50, -100)) //
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)), //
+                new Triangle(new Point3D(-150, -150, -115), new Point3D(-130, 137, -140), new Point3D(0, 0, -140)) //
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)), //
+                new Sphere(15, new Point3D(60, 50, -50)).setEmmission(new Color(java.awt.Color.cyan)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKt(0.7)),
+                new Triangle(new Point3D(90, 50, -50), new Point3D(60, 80, -50), new Point3D(60, 50, -20))
+                        .setEmmission(new Color(java.awt.Color.pink))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)),
+                new Triangle(new Point3D(60, 50, -20), new Point3D(200, 100, -50), new Point3D(30, 100, -70))
+                        .setEmmission(new Color(java.awt.Color.red))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)));
+
+        scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(60, 50, 0), new Vector(0, 0, -1)) //
+                .setKl(4E-5).setKq(2E-7));
+        scene.lights.add(new PointLight(new Color(300, 200, 300), new Point3D(60, 50, 0)));
+
+        ImageWriter imageWriter = new ImageWriter("refractionShadow11", 600, 600);
+        Render render = new Render() //
+                .setImageWriter(imageWriter) //
+                .setCamera(camera) //
+                .setRayTracerBase(new RayTracerBasic(scene));
+
+        render.renderImage();
+        render.writeToImage();
+    }
+
 }
