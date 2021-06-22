@@ -22,25 +22,17 @@ public class ImageWriter {
     private int nY;
     private int mini_nX;
     private int mini_nY;
-
-    public int getMini_nX() {
-        return mini_nX;
-    }
-
-    public int getMini_nY() {
-        return mini_nY;
-    }
-
     private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
-
     private BufferedImage image;
     private String imageName;
-
     private Logger logger = Logger.getLogger("ImageWriter");
 
+    //region Constructor
     // ***************** Constructors ********************** //
+
     /**
      * Image Writer constructor accepting image name and View Plane parameters,
+     *
      * @param imageName the name of jpeg file
      * @param nX        amount of pixels by Width
      * @param nY        amount of pixels by height
@@ -49,17 +41,17 @@ public class ImageWriter {
         this.imageName = imageName;
         this.nX = nX;
         this.nY = nY;
-        // default value for superSampling
-        this.mini_nX = 7;
-        this.mini_nY = 7;
+//        // default value for superSampling
+//        this.mini_nX = 7;
+//        this.mini_nY = 7;
 
         image = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
     }
+    //endregion
 
-    // ***************** Getters/Setters ********************** //
+    //region Getters
     /**
-     * View Plane Y axis resolution
-     *
+     * getter
      * @return the amount of vertical pixels
      */
     public int getNy() {
@@ -67,13 +59,36 @@ public class ImageWriter {
     }
 
     /**
-     * View Plane X axis resolution
-     *
+     * getter
      * @return the amount of horizontal pixels
      */
     public int getNx() {
         return nX;
     }
+
+    public int getMini_nX() {
+        return mini_nX;
+    }
+
+    public int getMini_nY() {
+        return mini_nY;
+    }
+    //endregion
+
+    //region Setters
+    /**
+     * setter using builder pattern
+     * @param mini_nX number of mini pixels in a pixel on x-axis
+     * @return this for chaining purposes
+     */
+    public ImageWriter setMini_nX_nY(int mini_nX, int mini_nY) {
+        this.mini_nX = mini_nX;
+        this.mini_nY = mini_nY;
+        return this;
+    }
+
+
+    //endregion
 
     // ***************** Operations ******************** //
 

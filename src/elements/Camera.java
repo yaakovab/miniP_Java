@@ -79,9 +79,33 @@ public class Camera {
     }
     //endregion
 
+    //region simple getters
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+    public Point3D getP0() {
+        return p0;
+    }
+
+    public Vector getVUP() {
+        return vUP;
+    }
+
+    public Vector getVTo() {
+        return vTo;
+    }
+
+    public Vector getVRight() {
+        return vRight;
+    }
+    //endregion
+
     /**
      * construct Ray through (center) given Pixel[i,j]
-     *
      * @param nX number of columns in the View Plane matrix
      * @param nY number of rows in the View Plane matrix
      * @param j  index of column
@@ -96,8 +120,42 @@ public class Camera {
     }
 
     /**
+     * this method is for improvements of the pic using SSAA (super sampling anti aliasing)
+     * methode to improve the picture
+     * beam of rays is being shot through each pixel and the color of the rays are weighed
+     * to calculate the average color which suitable to that pixel
+     * the methode is to treat a pixel as a view plane and thus shoot rays through it
+     * @param nX number of columns in the View Plane matrix
+     * @param nY number of rows in the View Plane matrix
+     * @param j index of column
+     * @param i index of row
+     * @param mini_Nx number of mini pixel in a pixel on x-axis
+     * @param mini_Ny number of mini pixels in a pixel on y-axis
+     * @return beam of rays (as a list) that being shot through a pixel
+     */
+    public List<Ray> constructBeamOfRaysThroughPixel(int nX, int nY, int j, int i, int mini_Nx, int mini_Ny) {
+        // pixel is now as a mini-ViewPlane - pc is center of view plane
+        Point3D pc = p0.add(vTo.scale(distance));
+        // gets the center of the mini view-plane
+        Point3D pc_ij = getPointInCenterOfPixel(nX, nY, j, i, pc, height, width);
+
+        double height1 = height / nY; // height of mini-VP
+        double width1 = width / nX; // width of mini-VP
+
+        List<Ray> sampleRays = new LinkedList<>(); // stores here all rays of mini-pixels
+        //goes through pixel's own mini-pixels
+        for (int k = 0; k < mini_Ny; k++) {
+            for (int l = 0; l < mini_Nx; l++) {
+                // gets the center of mini pixel and later shoots ray through that point
+                Point3D pkl = getPointInCenterOfPixel(mini_Ny, mini_Nx, l, k, pc_ij, height1, width1);
+                sampleRays.add(new Ray(p0, pkl.subtract(p0)));
+            }
+        }
+        return sampleRays;
+    }
+
+    /**
      * util func that gets any pixel in view plane and returns location of any pixel's center
-     *
      * @param nX number of columns in the View Plane matrix (or alternatively in the mini view plane - when using superSampling)
      * @param nY number of rows in the View Plane matrix (or alternatively in the mini view plane - when using superSampling)
      * @param j  index of column
@@ -131,53 +189,4 @@ public class Camera {
         }
         return pij;
     }
-
-
-    public List<Ray> constructBeamOfRaysThroughPixel(int nX, int nY, int j, int i, int mini_Nx, int mini_Ny) {
-        // pixel is now as a mini-ViewPlane - pc is center of view plane
-        Point3D pc = p0.add(vTo.scale(distance));
-        // gets the center of the mini view-plane
-        Point3D pc_ij = getPointInCenterOfPixel(nX, nY, j, i, pc, height, width);
-
-        double height1 = height / nY; // height of mini-VP
-        double width1 = width / nX; // width of mini-VP
-
-        List<Ray> sampleRays = new LinkedList<>(); // stores here all rays of mini-pixels
-        //goes through pixel's own mini-pixels
-        for (int k = 0; k < mini_Ny; k++) {
-            for (int l = 0; l < mini_Nx; l++) {
-                // gets the center of mini pixel and later shoots ray through that point
-                Point3D pkl = getPointInCenterOfPixel(mini_Ny, mini_Nx, l, k, pc_ij, height1, width1);
-                sampleRays.add(new Ray(p0, pkl.subtract(p0)));
-            }
-        }
-        return sampleRays;
-    }
-
-    //region simple getters
-    public double getWidth() {
-        return width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-    public Point3D getP0() {
-        return p0;
-    }
-
-    public Vector getVUP() {
-        return vUP;
-    }
-
-    public Vector getVTo() {
-        return vTo;
-    }
-
-    public Vector getVRight() {
-        return vRight;
-    }
-    //endregion
-
-
 }
