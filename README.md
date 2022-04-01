@@ -8,3 +8,10 @@
 </p> <p>It was developed in a methode of <strong>TDD or test driven design</strong> which means that before we started to write the code to resolve a problem we first thought 
 about where the solution might not work. We used both unit tests and integration tests.</p>
 <p>The project is divided into appropriate classes and sub-classes in the OOD (object-oriented design) way.</p>
+<h3>Some pictures</h3>
+<img width=400 alt="refraction with two spheres" src="https://github.com/yaakovab/miniP_Java/blob/master/images/refractionTwoSpheres.png" >
+ <img width=400 alt="multiple-objects-scene" src=https://github.com/yaakovab/miniP_Java/blob/master/images/Balloon%20field_MyPro2.png>
+ <img width=400 alt="multiple light sources with sphere" src="https://github.com/yaakovab/miniP_Java/blob/master/images/MultipleLightSphere.png">
+ <img width=400 alt="multiple light sources with two triangles" src="https://github.com/yaakovab/miniP_Java/blob/master/images/MultipleLightTriangles.png" >
+ <img width=400 alt="directional light with sphere" src="https://github.com/yaakovab/miniP_Java/blob/master/images/lightSphereDirectional.png" >
+ <img width=400 alt="" src="" >
